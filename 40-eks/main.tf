@@ -1,7 +1,7 @@
 resource "aws_key_pair" "eks" {
   key_name   = "eks"
   #public_key = file("C:/Users/bomma/OneDrive/Desktop/devops learning/KUBERNETTES/terraform-aws-eks/eks.pub")
-  public_key = file("C:\\Users\\bomma\\OneDrive\\Desktop\\devops learning\\KUBERNETTES\\terraform-aws-eks\\eks.pub")
+  public_key = file("C:\\Users\\bomma\\OneDrive\\Desktop\\devops learning\\KUBERNETTES\\k8-aws-eks\\eks.pub")
 }
 
 module "eks" {
