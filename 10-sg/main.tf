@@ -74,19 +74,19 @@ resource "aws_security_group_rule" "eks_node_eks_control_plane" {
   source_security_group_id = module.eks_control_plane_sg.sg_id
   security_group_id = module.eks_node_sg.sg_id
 }
-resource "aws_security_group_rule" "node_alb_ingress" {
-  type              = "ingress"    ##ingressssss value###
-  from_port         = 30000
-  to_port           = 32762
-  protocol          = "tcp"
-  source_security_group_id = module.alb_ingress_sg.sg_id
-  security_group_id = module.eks_node_sg.sg_id
-}
+# resource "aws_security_group_rule" "node_alb_ingress" {
+#   type              = "ingress"    ##ingressssss value###
+#   from_port         = 30000
+#   to_port           = 32762
+#   protocol          = "tcp"
+#   source_security_group_id = module.alb_ingress_sg.sg_id
+#   security_group_id = module.eks_node_sg.sg_id
+# }
 resource "aws_security_group_rule" "node_vpc" {
   type              = "ingress"    ##ingressssss value###
   from_port         = 0
   to_port           = 0
-  protocol          = "tcp"
+  protocol          = "-1"
   cidr_blocks = ["10.0.0.0/16"] ##our internall
   security_group_id = module.eks_node_sg.sg_id
 }
@@ -156,4 +156,13 @@ resource "aws_security_group_rule" "eks_control_plane_bastion" { ##rds
   protocol          = "tcp"
   source_security_group_id = module.bastion_sg.sg_id
   security_group_id = module.eks_control_plane_sg.sg_id
+}
+
+resource "aws_security_group_rule" "node_alb_ingress" {
+  type              = "ingress"    ##ingressssss value###
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  source_security_group_id = module.alb_ingress_sg.sg_id
+  security_group_id = module.eks_node_sg.sg_id
 }
